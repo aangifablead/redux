@@ -8,7 +8,6 @@ const RequireAuth = ({ allowedRoles }) => {
     const location = useLocation();
 
     return (
-        // Authorization check: Does the user role match the required roles?
         user?.roles?.find(role => allowedRoles?.includes(role))
             ? <Outlet />
             : token 
