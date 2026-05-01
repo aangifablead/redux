@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* This forces Tailwind v4 to look for the .dark class on the root */
+@custom-variant dark (&:where(.dark, .dark *));

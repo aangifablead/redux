@@ -1,0 +1,32 @@
+.list-container {
+  padding: 20px;
+  max-width: 350px;
+}
+
+.drag-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.drag-item:active {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.drag-item:hover {
+  border-color: #f1942a; /* Your dashboard theme orange */
+}
+
+.handle {
+  margin-right: 15px;
+  color: #ccc;
+  font-size: 1.2rem;
+}

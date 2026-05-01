@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  align-items: center;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 450px;
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.progress::before {
+  content: "";
+  background-color: #dcdcdc;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: 1;
+}
+
+.circle {
+  background-color: #fff;
+  color: #999;
+  border: 3px solid #dcdcdc;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 2;
+  transition: 0.4s ease;
+}
+
+.circle.active {
+  background-color: #f1942a;
+  color: #fff;
+  border-color: #f1942a;
+  box-shadow: 0 0 10px rgba(241, 148, 42, 0.5);
+}
+
+.step {
+  display: none; /* Hide steps by default */
+}
+
+.step.active {
+  display: block; /* Show step when active class is applied */
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #666;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+input:focus {
+  border-color: #f1942a;
+  box-shadow: 0 0 5px rgba(241, 148, 42, 0.5);
+  outline: none;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+button {
+  background-color: #f1942a;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#prevBtn {
+  background-color: #ccc;
+}
+
+#prevBtn:hover {
+  background-color: #bbb;
+}
+
+#nextBtn,
+#submitBtn {
+  background-color: #f1942a;
+  color: white;
+}
+
+#nextBtn:hover {
+  background-color: #e6831f;
+}
+
+#summary {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+#summary h3 {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+input.invalid, select.invalid {
+  border: 2px solid #e74c3c !important;
+  margin-bottom: 2px;
+}

@@ -1,0 +1,12 @@
+[
+    {"id": 1, "name": "John Doe", "email": "john@example.com", "role": "Admin", "status": "Active"},
+    {"id": 2, "name": "Jane Smith", "email": "jane@example.com", "role": "User", "status": "Inactive"},
+    {"id": 3, "name": "Mike Ross", "email": "mike@example.com", "role": "Editor", "status": "Active"},
+    {"id": 4, "name": "Rachel Zane", "email": "rachel@example.com", "role": "User", "status": "Active"},
+    {"id": 5, "name": "Harvey Specter", "email": "harvey@pearson.com", "role": "Admin", "status": "Active"},
+    {"id": 6, "name": "Donna Paulsen", "email": "donna@pearson.com", "role": "COO", "status": "Active"},
+    {"id": 7, "name": "Louis Litt", "email": "louis@litt.com", "role": "Partner", "status": "Active"},
+    {"id": 8, "name": "Jessica Pearson", "email": "jessica@boss.com", "role": "Owner", "status": "Active"},
+    {"id": 9, "name": "Michal Bennett", "email": "michal@law.com", "role": "Associate", "status": "Inactive"},
+    {"id": 10, "name": "Alex Williams", "email": "alex@law.com", "role": "Partner", "status": "Active"}
+]
