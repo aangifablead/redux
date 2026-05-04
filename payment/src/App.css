@@ -1,0 +1,40 @@
+.payment-card {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: white;
+  font-family: sans-serif;
+}
+
+.card-input-container {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  transition: border 0.3s ease;
+}
+
+.card-input-container:focus-within {
+  border-color: #6772e5; /* Stripe Purple */
+}
+
+.pay-btn {
+  width: 100%;
+  background: #6772e5;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pay-btn:disabled {
+  background: #aab7c4;
+}
+
+.error-text { color: #fa755a; font-size: 14px; margin-bottom: 10px; }
+.success-msg { text-align: center; color: #2ecc71; font-weight: bold; }
