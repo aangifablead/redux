@@ -7,7 +7,7 @@ export const fetchData = createAsyncThunk('api/fetchData', async () => {
 
     console.log(response,'datadata')
     return data
-})quotes
+})
 
 const apiSlice = createSlice({
     name: 'apiData',
