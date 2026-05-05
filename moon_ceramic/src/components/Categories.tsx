@@ -1,14 +1,4 @@
-import h2Image from '../assets/h2.png';
-import h3Image from '../assets/h3.png';
-import h4Image from '../assets/h4.png';
-import h5Image from '../assets/h5.png';
-
-const categories = [
-    { id: 1, name: "Tableware", img: h2Image },
-    { id: 2, name: "Home Decor", img: h3Image },
-    { id: 3, name: "Holiday", img: h4Image },
-    { id: 4, name: "Collection", img: h5Image },
-];
+import { categories } from "../data/products";
 
 const Categories = () => (
     <section className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-6">

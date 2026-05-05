@@ -1,3 +1,7 @@
+import h2Image from '../assets/h2.png';
+import h3Image from '../assets/h3.png';
+import h4Image from '../assets/h4.png';
+import h5Image from '../assets/h5.png';
 import h9Image from '../assets/h9.png';
 import h10Image from '../assets/h10.png';
 import h11Image from '../assets/h11.png';
@@ -14,7 +18,17 @@ export interface Product {
   img: string;
   desc: string;
 }
-
+export interface category {
+  id: number;
+  name: string;
+  img: string;
+}
+export const categories: category[] = [
+  { id: 1, name: "Tableware", img: h2Image },
+  { id: 2, name: "Home Decor", img: h3Image },
+  { id: 3, name: "Holiday", img: h4Image },
+  { id: 4, name: "Collection", img: h5Image },
+];
 export const BEST_SELLERS: Product[] = [
   { id: 1, name: 'Small Ecru Ceramic Compote', price: 399, img: h9Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.' },
   { id: 2, name: 'Warrick White Vase 14"', price: 699, img: h10Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.' },
@@ -28,6 +42,5 @@ export const NEW_ARRIVALS: Product[] = [
   { id: 7, name: 'Porcelain Dinner Plate', price: 599, img: h15Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.' },
   { id: 8, name: 'Luana Bowl', price: 449, img: h16Image, desc: 'Lorem ipsum dolor sit amet conse.' },
 ];
-
 
 export const ALL_PRODUCTS = [...BEST_SELLERS, ...NEW_ARRIVALS];
