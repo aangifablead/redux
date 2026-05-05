@@ -1,6 +1,6 @@
 const Newsletter = () => {
   return (
-    <section className="py-24 bg-[#F9F8F6] text-center px-6">
+    <section className="py-16 bg-[#F9F8F6] text-center px-6">
       <span className="text-[10px] uppercase tracking-[0.1em] text-stone-500 mb-2 block">Sign up for emails</span>
       <h2 className="text-2xl font-serif text-stone-800 uppercase tracking-[0.2em] mb-10">
         For News, Collections & More

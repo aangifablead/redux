@@ -16,7 +16,7 @@ interface ProductSectionProps {
 
 const ProductSection: React.FC<ProductSectionProps> = ({ title, products }) => {
   return (
-    <section className="py-20 max-w-7xl mx-auto px-6">
+    <section className="py-15 max-w-7xl mx-auto px-6">
       <h2 className="text-center text-xl font-serif uppercase tracking-[0.3em] text-stone-800 mb-12">
         {title}
       </h2>
@@ -30,7 +30,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ title, products }) => {
               {product.name}
             </h4>
             <p className="text-xs text-stone-500 font-bold mt-1">
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </p>
             <p className="text-[10px] text-stone-400 mt-2 leading-relaxed">
               {product.desc}

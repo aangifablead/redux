@@ -34,7 +34,6 @@ const Navbar: React.FC = () => {
                     {isLoggedIn ? (
                         <div className="flex items-center space-x-4 border-l pl-6 border-stone-300">
                             <div className="text-right hidden sm:block">
-                                <p className="text-xs text-stone-400 uppercase tracking-tighter font-bold">Account</p>
                                 <p className="text-sm font-medium text-stone-800">{user?.name}</p>
                             </div>
                             <button onClick={() => dispatch(logout())} className="text-stone-500 hover:text-red-600 transition">
