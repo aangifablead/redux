@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import AuthPage from './pages/AuthPage';
+import ProductDetail from './components/ProductDetail';
+import CartPage from './pages/Cart';
+import CheckoutPage from './pages/CheckOut';
 
 function App() {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
@@ -17,7 +20,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route
             path="/login"
             element={!isLoggedIn ? <AuthPage type="login" /> : <Navigate to="/" />}
@@ -26,7 +31,6 @@ function App() {
             path="/signup"
             element={!isLoggedIn ? <AuthPage type="signup" /> : <Navigate to="/" />}
           />
-
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 

@@ -1,6 +1,5 @@
-import React from 'react';
-// 1. Import the image as a variable
 import h1Image from '../assets/h1.png';
+
 const Hero = () => (
   <section className="relative w-full h-[600px] flex items-center overflow-hidden">
     <img src={h1Image} className="absolute inset-0 w-full h-full object-cover" alt="Hero" />
@@ -13,4 +12,5 @@ const Hero = () => (
     </div>
   </section>
 );
+
 export default Hero;

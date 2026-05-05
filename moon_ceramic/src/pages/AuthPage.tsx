@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, signUp } from '../features/authSlice';
 
 const AuthPage = ({ type: initialType }: { type: 'login' | 'signup' }) => {
-  // Use state to allow toggling between 'login' and 'signup'
   const [authMode, setAuthMode] = useState<'login' | 'signup'>(initialType);
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const AuthPage = ({ type: initialType }: { type: 'login' | 'signup' }) => {
       alert('Account created!');
       setAuthMode('login');
     } else {
-      // 1. Check if user exists in the list before trying to login
       const userExists = registeredUsers.some((u: any) => u.email === formData.email);
       if (!userExists) {
         if (confirm("No account found. Would you like to create one?")) {
@@ -59,7 +57,6 @@ const AuthPage = ({ type: initialType }: { type: 'login' | 'signup' }) => {
           </button>
         </form>
 
-        {/* Toggle link at the bottom */}
         <div className="mt-8 text-center">
           <button
             onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}

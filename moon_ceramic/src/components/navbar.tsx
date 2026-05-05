@@ -1,34 +1,44 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../app/store'; // Adjust path
+import { RootState } from '../app/store'; 
 import { logout } from '../features/authSlice';
-import { ShoppingCart, Heart, User, LogOut, Menu, Search } from 'lucide-react';
+import {  LogOut, Menu,  ShoppingBagIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
     const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+    
+    const cartItems = useSelector((state: RootState) => state.cart.items);
+    
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    
     const dispatch = useDispatch();
 
     return (
         <nav className="fixed top-0 w-full z-50 bg-[#F9F8F6]/80 backdrop-blur-md border-b border-stone-200">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                {/* Logo */}
-                <h1 className="text-2xl font-serif tracking-widest text-stone-800">MOON.</h1>
+                <Link to="/">
+                    <h1 className="text-2xl font-serif tracking-widest text-stone-800 cursor-pointer">MOON.</h1>
+                </Link>
 
-                {/* Links - Desktop */}
                 <div className="hidden md:flex space-x-10 text-sm uppercase tracking-widest text-stone-600">
-                    <a href="/" className="hover:text-stone-900 transition">Home</a>
-                    <a href="/" className="hover:text-stone-900 transition">Shop</a>
-                    <a href="/" className="hover:text-stone-900 transition">About</a>
-                    <a href="/" className="hover:text-stone-900 transition">Contact</a>
+                    <Link to="/" className="hover:text-stone-900 transition">Home</Link>
+                    <Link to="/" className="hover:text-stone-900 transition">Shop</Link>
+                    <Link to="/" className="hover:text-stone-900 transition">About</Link>
+                    <Link to="/" className="hover:text-stone-900 transition">Contact</Link>
                 </div>
 
-                {/* Icons & Auth */}
-                <div className="flex items-center space-x-6">
-                    <Search size={20} className="text-stone-600 cursor-pointer" />
-                    <Heart size={20} className="text-stone-600 cursor-pointer" />
+
+                <div className="flex items-center space-x-6">                 
                     <div className="relative">
-                        <ShoppingCart size={20} className="text-stone-600 cursor-pointer" />
-                        <span className="absolute -top-2 -right-2 bg-stone-800 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                        <Link to="/cart" className="relative block">
+                            <ShoppingBagIcon className="w-6 h-6 text-stone-800" />
+                            {totalQuantity > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-black text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                                    {totalQuantity}
+                                </span>
+                            )}
+                        </Link>
                     </div>
 
                     {isLoggedIn ? (
@@ -36,19 +46,20 @@ const Navbar: React.FC = () => {
                             <div className="text-right hidden sm:block">
                                 <p className="text-sm font-medium text-stone-800">{user?.name}</p>
                             </div>
-                            <button onClick={() => dispatch(logout())} className="text-stone-500 hover:text-red-600 transition">
+                            <button onClick={() => dispatch(logout())} className="text-stone-500 hover:text-red-600 transition cursor-pointer">
                                 <LogOut size={20} />
                             </button>
                         </div>
                     ) : (
-                        <a href="/login" className="bg-stone-800 text-white px-5 py-2 text-xs uppercase tracking-widest hover:bg-stone-700 transition">
+                        <Link to="/login" className="bg-stone-800 text-white px-5 py-2 text-xs uppercase tracking-widest hover:bg-stone-700 transition">
                             Sign In
-                        </a>
+                        </Link>
                     )}
-                    <Menu className="md:hidden text-stone-800" size={24} />
+                    <Menu className="md:hidden text-stone-800 cursor-pointer" size={24} />
                 </div>
             </div>
         </nav>
     );
 };
-export default Navbar
+
+export default Navbar;

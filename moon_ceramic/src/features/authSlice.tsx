@@ -3,13 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface User {
   name: string;
   email: string;
-  // password:string
 }
 
 interface AuthState {
   user: User | null;
   isLoggedIn: boolean;
-  registeredUsers: User[]; // Mocking a database
+  registeredUsers: User[]; 
 }
 
 const initialState: AuthState = {
@@ -26,7 +25,6 @@ const authSlice = createSlice({
       const exists = state.registeredUsers.find(u => u.email === action.payload.email);
       if (!exists) {
         state.registeredUsers.push(action.payload);
-        // Sync to localStorage
         localStorage.setItem('users', JSON.stringify(state.registeredUsers));
       }
     },
@@ -39,8 +37,6 @@ const authSlice = createSlice({
         state.user = existingUser;
         localStorage.setItem('activeUser', JSON.stringify(existingUser));
       } else {
-        // Instead of throwing, we let the component handle the missing user
-        // or you could set a state.error message here.
         console.warn("User not found");
       }
     },
