@@ -2,6 +2,9 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingScreen from './components/LoadingScreen';
+import ShopPage from './pages/Shop';
+import AboutPage from './pages/about';
+import ContactPage from './pages/contactUs';
 
 // Import Components
 const Navbar=React.lazy(()=> import("../src/components/navbar"))
@@ -25,6 +28,9 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route
             path="/login"
             element={!isLoggedIn ? <AuthPage type="login" /> : <Navigate to="/" />}

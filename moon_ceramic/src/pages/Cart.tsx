@@ -15,7 +15,7 @@ const CartPage: React.FC = () => {
         return (
             <div className="max-w-7xl mx-auto px-6 py-40 text-center">
                 <h2 className="text-2xl font-serif uppercase tracking-widest text-stone-400">Your cart is empty</h2>
-                <a href="/" className="mt-8 inline-block text-[10px] uppercase tracking-[0.2em] font-bold border-b border-stone-800 pb-1">
+                <a href="/shop" className="mt-8 inline-block text-[10px] uppercase tracking-[0.2em] font-bold border-b border-stone-800 pb-1">
                     Continue Shopping
                 </a>
             </div>

@@ -10,6 +10,7 @@ import h13Image from '../assets/h13.png';
 import h14Image from '../assets/h14.png';
 import h15Image from '../assets/h15.png';
 import h16Image from '../assets/h16.png';
+import h18Image from '../assets/h18.png';
 
 export interface Product {
   id: number;
@@ -22,6 +23,15 @@ export interface category {
   id: number;
   name: string;
   img: string;
+}
+export interface Shop {
+  id: number;
+  name: string;
+  price: number;
+  img: string;
+  desc: string;
+  category:string;
+  color:string;
 }
 export const categories: category[] = [
   { id: 1, name: "Tableware", img: h2Image },
@@ -44,3 +54,15 @@ export const NEW_ARRIVALS: Product[] = [
 ];
 
 export const ALL_PRODUCTS = [...BEST_SELLERS, ...NEW_ARRIVALS];
+
+export const SHOP: Shop[] = [
+  { id: 1, name: 'Small Ecru Ceramic Compote', price: 399, img: h9Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Gifts sets',color: "#9EA7B1"},
+  { id: 2, name: 'Warrick White Vase 14"', price: 699, img: h10Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Decor Art',color:'#D9B8A9' },
+  { id: 3, name: 'Porcelain Dinner Plate', price: 499, img: h11Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Furniture',color: '#A55D5D'},
+  { id: 4, name: 'Warrick White Vase 20', price: 899, img: h12Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Ceramic',color: "#D9B8A9"},
+  { id: 5, name: 'Porcelain Dinner Plate', price: 399, img: h13Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Gifts sets',color: "#E1E8E1"},
+  { id: 6, name: 'Ophelia Matte Natural Vase', price: 999, img: h14Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur.',category:'Decor Art',color: "#D9B8A9"},
+  { id: 7, name: 'Porcelain Dinner Plate', price: 599, img: h15Image, desc: 'Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.',category:'Furniture',color: "#E1E8E1"},
+  { id: 8, name: 'Luana Bowl', price: 449, img: h16Image, desc: 'Lorem ipsum dolor sit amet conse.',category:'Ceramic',color: '#FFFFFF'},
+  { id: 9, name: 'Luana Bowl', price: 559, img: h18Image, desc: 'Lorem ipsum dolor sit amet conse.',category:'Dinnerware',color: '#FFFFFF'},
+]

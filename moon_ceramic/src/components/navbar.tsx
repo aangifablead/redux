@@ -23,9 +23,9 @@ const Navbar: React.FC = () => {
 
                 <div className="hidden md:flex space-x-10 text-sm uppercase tracking-widest text-stone-600">
                     <Link to="/" className="hover:text-stone-900 transition">Home</Link>
-                    <Link to="/" className="hover:text-stone-900 transition">Shop</Link>
-                    <Link to="/" className="hover:text-stone-900 transition">About</Link>
-                    <Link to="/" className="hover:text-stone-900 transition">Contact</Link>
+                   <Link to="/shop" className="hover:text-stone-900 transition">Shop</Link>
+                    <Link to="/about" className="hover:text-stone-900 transition">About</Link>
+                    <Link to="/contact" className="hover:text-stone-900 transition">Contact</Link>
                 </div>
 
 
