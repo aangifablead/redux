@@ -1,23 +1,46 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store';
-import { removeItem, incrementQuantity, decrementQuantity } from '../features/cartSlice'; // Recommended to add this!
-import { Trash2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { removeItem, incrementQuantity, decrementQuantity } from '../features/cartSlice';
+import { Trash2, ShoppingBag } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const CartPage: React.FC = () => {
-    const { items } = useSelector((state: RootState) => state.cart);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    // 1. Safely access Auth and Cart state
+    const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+    const { cartsByUser } = useSelector((state: RootState) => state.cart);
+
+    // 2. Derive items for the current user safely
+    const userEmail = user?.email;
+    const items = (isLoggedIn && userEmail) ? (cartsByUser[userEmail] || []) : [];
+
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+    // 3. Prevent Crash: Handle logged out state
+    if (!isLoggedIn) {
+        return (
+            <div className="max-w-7xl mx-auto px-6 py-40 text-center">
+                <ShoppingBag className="mx-auto mb-6 text-stone-300" size={48} />
+                <h2 className="text-2xl font-serif uppercase tracking-widest text-stone-800">Please Sign In</h2>
+                <p className="mt-4 text-sm text-stone-500 mb-8">You need to be logged in to view your shopping bag.</p>
+                <Link to="/login" className="bg-stone-800 text-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-stone-700 transition">
+                    Go to Login
+                </Link>
+            </div>
+        );
+    }
+
+    // 4. Handle empty cart state
     if (items.length === 0) {
         return (
             <div className="max-w-7xl mx-auto px-6 py-40 text-center">
                 <h2 className="text-2xl font-serif uppercase tracking-widest text-stone-400">Your cart is empty</h2>
-                <a href="/shop" className="mt-8 inline-block text-[10px] uppercase tracking-[0.2em] font-bold border-b border-stone-800 pb-1">
+                <Link to="/shop" className="mt-8 inline-block text-[10px] uppercase tracking-[0.2em] font-bold border-b border-stone-800 pb-1">
                     Continue Shopping
-                </a>
+                </Link>
             </div>
         );
     }
@@ -52,18 +75,16 @@ const CartPage: React.FC = () => {
                                 <td className="py-8 text-xs text-stone-600">
                                     <div className="flex items-center border border-stone-200 w-fit">
                                         <button
-                                            onClick={() => dispatch(decrementQuantity(item.id))}
+                                            onClick={() => dispatch(decrementQuantity({ id: item.id, userId: userEmail! }))}
                                             className="px-3 py-1 hover:bg-stone-50 cursor-pointer transition-colors"
                                         >
                                             -
                                         </button>
-
                                         <span className="px-3 py-1 border-x border-stone-200 min-w-[40px] text-center">
                                             {item.quantity}
                                         </span>
-
                                         <button
-                                            onClick={() => dispatch(incrementQuantity(item.id))}
+                                            onClick={() => dispatch(incrementQuantity({ id: item.id, userId: userEmail! }))}
                                             className="px-3 py-1 hover:bg-stone-50 cursor-pointer transition-colors"
                                         >
                                             +
@@ -73,7 +94,7 @@ const CartPage: React.FC = () => {
                                 <td className="py-8 text-xs font-bold text-stone-800 text-right">₹{(item.price * item.quantity).toFixed(2)}</td>
                                 <td className="py-8 text-right">
                                     <button
-                                        onClick={() => dispatch(removeItem(item.id))}
+                                        onClick={() => dispatch(removeItem({ id: item.id, userId: userEmail! }))}
                                         className="text-stone-300 hover:text-red-500 transition-colors"
                                     >
                                         <Trash2 size={16} />
@@ -85,7 +106,6 @@ const CartPage: React.FC = () => {
                 </table>
             </div>
 
-            {/* Cart Summary Section */}
             <div className="mt-16 flex flex-col md:flex-row justify-between items-start gap-12">
                 <div className="flex-1 max-w-md w-full">
                     <p className="text-[10px] uppercase font-bold tracking-widest mb-4">Order Note</p>

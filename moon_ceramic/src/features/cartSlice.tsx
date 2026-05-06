@@ -9,49 +9,76 @@ interface CartItem {
 }
 
 interface CartState {
-    items: CartItem[];
+    // Store carts as { "userEmail1": [items], "userEmail2": [items] }
+    cartsByUser: Record<string, CartItem[]>;
 }
 
+// Load all carts from localStorage once
 const initialState: CartState = {
-    items: JSON.parse(localStorage.getItem('cart') || '[]'),
+    cartsByUser: JSON.parse(localStorage.getItem('moon_carts_by_user') || '{}'),
 };
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addToCart: (state, action: PayloadAction<Omit<CartItem, 'quantity'>>) => {
-            const existing = state.items.find(item => item.id === action.payload.id);
+        addToCart: (state, action: PayloadAction<{ item: Omit<CartItem, 'quantity'>; userId: string }>) => {
+            const { item, userId } = action.payload;
+            
+            if (!state.cartsByUser[userId]) {
+                state.cartsByUser[userId] = [];
+            }
+
+            const existing = state.cartsByUser[userId].find(i => i.id === item.id);
             if (existing) {
                 existing.quantity += 1;
             } else {
-                state.items.push({ ...action.payload, quantity: 1 });
+                state.cartsByUser[userId].push({ ...item, quantity: 1 });
             }
-            localStorage.setItem('cart', JSON.stringify(state.items));
+            
+            localStorage.setItem('moon_carts_by_user', JSON.stringify(state.cartsByUser));
         },
-        updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
-            const item = state.items.find(i => i.id === action.payload.id);
-            if (item) item.quantity = action.payload.quantity;
-            localStorage.setItem('cart', JSON.stringify(state.items));
-        },
-        removeItem: (state, action: PayloadAction<number>) => {
-            state.items = state.items.filter(i => i.id !== action.payload);
-            localStorage.setItem('cart', JSON.stringify(state.items));
-        },
-        incrementQuantity: (state, action: PayloadAction<number>) => {
-            const item = state.items.find((item) => item.id === action.payload);
+
+        incrementQuantity: (state, action: PayloadAction<{ id: number; userId: string }>) => {
+            const { id, userId } = action.payload;
+            const item = state.cartsByUser[userId]?.find(i => i.id === id);
             if (item) {
                 item.quantity += 1;
+                localStorage.setItem('moon_carts_by_user', JSON.stringify(state.cartsByUser));
             }
         },
-        decrementQuantity: (state, action: PayloadAction<number>) => {
-            const item = state.items.find((item) => item.id === action.payload);
+
+        decrementQuantity: (state, action: PayloadAction<{ id: number; userId: string }>) => {
+            const { id, userId } = action.payload;
+            const item = state.cartsByUser[userId]?.find(i => i.id === id);
             if (item && item.quantity > 1) {
                 item.quantity -= 1;
+                localStorage.setItem('moon_carts_by_user', JSON.stringify(state.cartsByUser));
             }
         },
+
+        removeItem: (state, action: PayloadAction<{ id: number; userId: string }>) => {
+            const { id, userId } = action.payload;
+            if (state.cartsByUser[userId]) {
+                state.cartsByUser[userId] = state.cartsByUser[userId].filter(i => i.id !== id);
+                localStorage.setItem('moon_carts_by_user', JSON.stringify(state.cartsByUser));
+            }
+        },
+        
+        // Add a clear action for logout if needed
+        clearUserCart: (state, action: PayloadAction<string>) => {
+            delete state.cartsByUser[action.payload];
+            localStorage.setItem('moon_carts_by_user', JSON.stringify(state.cartsByUser));
+        }
     }
 });
 
-export const { addToCart, updateQuantity, removeItem,decrementQuantity,incrementQuantity } = cartSlice.actions;
+export const { 
+    addToCart, 
+    removeItem, 
+    decrementQuantity, 
+    incrementQuantity, 
+    clearUserCart 
+} = cartSlice.actions;
+
 export default cartSlice.reducer;
